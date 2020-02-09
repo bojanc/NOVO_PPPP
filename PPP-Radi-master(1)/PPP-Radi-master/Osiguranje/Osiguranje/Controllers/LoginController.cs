@@ -32,7 +32,7 @@ namespace Osiguranje.Controllers
                 else
                 {
                     Session["Username"] = korisnik.Username;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Klijent");
                 }
             }
         }

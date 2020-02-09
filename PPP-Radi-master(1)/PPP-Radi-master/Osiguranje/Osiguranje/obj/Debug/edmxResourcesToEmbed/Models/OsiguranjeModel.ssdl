@@ -13,7 +13,7 @@
     <Key>
       <PropertyRef Name="JMBG" />
     </Key>
-    <Property Name="JMBG" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="JMBG" Type="nvarchar" MaxLength="13" Nullable="false" />
     <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Prezime" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -42,21 +42,11 @@
       <PropertyRef Name="IDPolisa" />
     </Key>
     <Property Name="IDPolisa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="JMBG" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="JMBG" Type="nvarchar" MaxLength="13" Nullable="false" />
     <Property Name="DatOd" Type="date" Nullable="false" />
     <Property Name="DatDo" Type="date" Nullable="false" />
     <Property Name="Tarifa" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Premija" Type="float" Nullable="false" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <Association Name="FK_Imovina_Polisa">
     <End Role="Polisa" Type="Self.Polisa" Multiplicity="1" />
@@ -100,7 +90,6 @@
     <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Objekat" EntityType="Self.Objekat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Polisa" EntityType="Self.Polisa" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Imovina_Polisa" Association="Self.FK_Imovina_Polisa">
       <End Role="Polisa" EntitySet="Polisa" />
       <End Role="Imovina" EntitySet="Imovina" />

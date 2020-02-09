@@ -26,13 +26,13 @@ namespace Osiguranje.Controllers
             foreach (Imovina i in db.Imovinas.Where(y => y.IDPolisa == p.IDPolisa))
             {
                 p.Imovinas.Add(i);
-                p.Premija += i.Vrednost * Convert.ToDouble(p.Tarifa);
+                p.Premija += i.Vrednost * (Convert.ToDouble(p.Tarifa))/100;
             }
 
             foreach (Objekat o in db.Objekats.Where(c => c.IDPolisa == p.IDPolisa))
             {
                 p.Objekats.Add(o);
-                p.Premija += o.Vrednost * Convert.ToDouble(p.Tarifa);
+                p.Premija += o.Vrednost * Convert.ToDouble(p.Tarifa)/100;
             }
             try { db.SaveChanges(); }catch (Exception) { }
 

@@ -4,16 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8949203866294ee2ab262b70fce65626" Name="Diagram1">
-        <EntityTypeShape EntityType="OsiguranjeModel.Imovina" Width="1.5" PointX="5.25" PointY="1.125" />
-        <EntityTypeShape EntityType="OsiguranjeModel.Klijent" Width="1.5" PointX="0.75" PointY="2.375" />
-        <EntityTypeShape EntityType="OsiguranjeModel.Korisnik" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="OsiguranjeModel.Objekat" Width="1.5" PointX="5.25" PointY="3.75" />
-        <EntityTypeShape EntityType="OsiguranjeModel.Polisa" Width="1.5" PointX="3" PointY="2.125" />
-        <EntityTypeShape EntityType="OsiguranjeModel.sysdiagram" Width="1.5" PointX="2.75" PointY="6.75" />
-        <AssociationConnector Association="OsiguranjeModel.FK_Imovina_Polisa" />
-        <AssociationConnector Association="OsiguranjeModel.FK_Polisa_Klijent" />
-        <AssociationConnector Association="OsiguranjeModel.FK_Objekat_Polisa" />
+      <Diagram DiagramId="691d675d0706411691e3066a81c1286a" Name="Diagram1">
+        <EntityTypeShape EntityType="OsiguranjeModel.Imovina" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OsiguranjeModel.Klijent" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OsiguranjeModel.Korisnik" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OsiguranjeModel.Objekat" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OsiguranjeModel.Polisa" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="OsiguranjeModel.FK_Imovina_Polisa" ManuallyRouted="false" />
+        <AssociationConnector Association="OsiguranjeModel.FK_Polisa_Klijent" ManuallyRouted="false" />
+        <AssociationConnector Association="OsiguranjeModel.FK_Objekat_Polisa" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

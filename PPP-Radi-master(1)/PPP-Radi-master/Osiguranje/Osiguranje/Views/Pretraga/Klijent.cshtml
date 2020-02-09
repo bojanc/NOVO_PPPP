@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Osiguranje.Models.Klijent>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<table width="100%">
+    <tr>
+        <td style="padding-bottom:10px;">
+            <h2>Klijenti</h2>
+        </td>
+        <td align="center">
+            <form name="pretraga" method="post">
+
+                <div class="col-md-12">
+                    <div class="col-md-2 col-md-offset-2">
+                        <select id="SelectPretraga" class="form-control ">
+                            <optgroup label="Klijent">
+                                <option value="JMBG">JMBG</option>
+                                <option value="Ime">Ime</option>
+                                <option value="Prezime">Prezime</option>
+                            </optgroup>
+                            <optgroup label="Polisa">
+                                <option value="IDPolisa">Sifra polise</option>
+                                <option value="DatOd">Datum pocetka</option>
+                                <option value="DatDo">Datum isteka</option>
+                                <option value="Tarifa">Tarifa obracuna</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="padding:0;">
+                        <input type="text" name="pretraga" id="pretraga" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <a href="" id="btnPretraga" class="btn btn-primary btn sm" onclick="onChange()">
+                            Pretraga
+                        </a>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    function onChange() {
+                        var s = document.getElementById("SelectPretraga");
+                        var v = s.options[s.selectedIndex].value;
+                        var index = document.getElementById("pretraga").value;
+
+                        if (v == "JMBG") {
+                            var btn = document.getElementById("btnPretraga");
+                            var link = '@Url.Action("JMBG", "Pretraga",new { id = "-1" })';
+                            link = link.replace("-1", index);
+                            btn.setAttribute("href", link);
+                        }
+                        if (v == "Ime") {
+                            var btn = document.getElementById("btnPretraga");
+                            var link = '@Url.Action("Ime", "Pretraga",new { id = "-1" })';
+                            link = link.replace("-1", index);
+                            btn.setAttribute("href", link);
+                        }
+                        if (v == "Prezime") {
+                            var btn = document.getElementById("btnPretraga");
+                            var link = '@Url.Action("Prezime", "Pretraga",new { id = "-1" })';
+                            link = link.replace("-1", index);
+                            btn.setAttribute("href", link);
+                        }
+
+                        if (v == "IDPolisa") {
+                            var btn = document.getElementById("btnPretraga");
+                            var link = '@Url.Action("IDPolisa", "Pretraga",new { id = "-1" })';
+                            link = link.replace("-1", index);
+                            btn.setAttribute("href", link);
+                        }
+                        if (v == "DatOd") {
+                            var btn = document.getElementById("btnPretraga");
+                            var link = '@Url.Action("DatOd", "Pretraga",new { id = "-1" })';
+                            link = link.replace("-1", index);
+                            btn.setAttribute("href", link);
+                        }
+                        if (v == "DatDo") {
+                            var btn = document.getElementById("btnPretraga");
+                            var link = '@Url.Action("DatDo", "Pretraga",new { id = "-1" })';
+                            link = link.replace("-1", index);
+                            btn.setAttribute("href", link);
+                        }
+                        if (v == "Tarifa") {
+                            var btn = document.getElementById("btnPretraga");
+                            var link = '@Url.Action("Tarifa", "Pretraga",new { id = "-1" })';
+                            link = link.replace("-1", index);
+                            btn.setAttribute("href", link);
+                        }
+                    }
+                </script>
+            </form>
+        </td>
+        <td align="right">
+            <a href="@Url.Action("Create", "Klijent")" class="btn btn-primary btn sm">
+                Nov klijent
+            </a>
+        </td>
+    </tr>
+</table>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prezime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrojTelefona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumRodjenja)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojTelefona)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumRodjenja)
+            </td>
+            <td align="right">
+                <a href="@Url.Action("Details", "Klijent", new { id= item.JMBG})" class="btn btn-primary btn sm">
+                    Detalji
+                </a>
+                <a href="@Url.Action("Delete", "Klijent", new { id= item.JMBG})" class="btn btn-danger btn sm">
+                    Izbrisi
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

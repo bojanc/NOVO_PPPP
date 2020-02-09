@@ -43,14 +43,14 @@ using System;
         public System.DateTime DatDo { get; set; }
 
         [Required(ErrorMessage = "Morate uneti tarifu")]
-        [RegularExpression("^\\d{2,10}$", ErrorMessage = "Unesite ispravnu tarifu")]
+        [RegularExpression("^[1-9][0-9]?$|^100$", ErrorMessage = "Unesite ispravnu tarifu")]
         public string Tarifa { get; set; }
 
     public double Premija { get; set; }
 
 
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Imovina> Imovinas { get; set; }
 

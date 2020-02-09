@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Osiguranje.Models.Klijent>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<table width="100%">
+    <tr>
+        <td style="padding-bottom:10px;">
+            <h2>Klijenti</h2>
+        </td>
+        <td align="center">
+            <form name="pretraga" method="post">
+                <select id="SelectPretraga" onchange="onChange()" onload="onChange()">
+                    <optgroup label="Klijent">
+                        <option value="Ime">Ime</option>
+                        <option value="Prezime">Prezime</option>
+                        <option value="Email">Email</option>
+                        <option value="BrojTelefona">Broj telefona</option>
+                        <option value="DatumRodjenja">Datum rodjenja</option>
+                    </optgroup>
+                    <optgroup label="Polisa">
+                        <option value="DatOd">Datum pocetka</option>
+                        <option value="DatDo">Datum isteka</option>
+                        <option value="Tarifa">Tarifa obracuna</option>
+                        <option value="Premija">Ukupna premija</option>
+                    </optgroup>
+                </select>
+                <input type="text" name="pretraga" id="pretraga"/>
+                <a href="" id="btnPretraga" class="btn btn-primary btn sm">
+                    Pretraga
+                </a>
+                <script type="text/javascript">
+                    function onChange() {
+                        var s = document.getElementById("SelectPretraga");
+                        var v = s.options[s.selectedIndex].value;
+                        var index = document.getElementById("pretraga").value;
+                        if (v == "Ime") {
+                            var btn = document.getElementById("btnPretraga");
+                            btn.setAttribute("href", "@Url.Action("Ime","Pretraga")");
+                        }
+                        if (v == "Prezime") {
+                            var btn = document.getElementById("btnPretraga");
+                            @*btn.setAttribute("href", "@Url.Action("Prezime","Pretraga")" );*@
+                            btn.onclick(window.open("https://localhost:44315/Pretraga/Prezime" + "/" + index));
+                        }
+                        if (v == "Email") {
+                            var btn = document.getElementById("btnPretraga");
+                            btn.setAttribute("href", "@Url.Action("Email","Pretraga")" );
+                        }
+                        if (v == "BrojTelefona") {
+                            var btn = document.getElementById("btnPretraga");
+                            btn.setAttribute("href", "@Url.Action("BrojTelefona","Pretraga")" );
+                        }
+                        if (v == "DatumRodjenja") {
+                            var btn = document.getElementById("btnPretraga");
+                            btn.setAttribute("href", "@Url.Action("DatumRodjenja","Pretraga")" );
+                        }
+
+
+                        if (v == "DatOd") {
+                            var btn = document.getElementById("btnPretraga");
+                            btn.setAttribute("href", "@Url.Action("DatOd","Pretraga")" );
+                        }
+                        if (v == "DatDo") {
+                            var btn = document.getElementById("btnPretraga");
+                            btn.setAttribute("href", "@Url.Action("DatDo","Pretraga")" );
+                        }
+                        if (v == "Tarifa") {
+                            var btn = document.getElementById("btnPretraga");
+                            btn.setAttribute("href", "@Url.Action("Tarifa","Pretraga")" );
+                        } 
+                        if (v == "Premija") {
+                            var btn = document.getElementById("btnPretraga");
+                            btn.setAttribute("href", "@Url.Action("Premija","Pretraga")" );
+                        }
+                    }
+                </script>
+            </form>
+        </td>
+        <td align="right">
+            <a href="@Url.Action("Create", "Klijent")" class="btn btn-primary btn sm">
+                Nov klijent
+            </a>
+        </td>
+    </tr>
+</table>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prezime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrojTelefona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumRodjenja)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojTelefona)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumRodjenja)
+            </td>
+            <td align="right">
+                <a href="@Url.Action("Details", "Klijent", new { id= item.JMBG})" class="btn btn-primary btn sm">
+                    Detalji
+                </a>
+                <a href="@Url.Action("Delete", "Klijent", new { id= item.JMBG})" class="btn btn-danger btn sm">
+                    Izbrisi
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OsiguranjeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Imovina">
+    <Key>
+      <PropertyRef Name="IDImovina" />
+    </Key>
+    <Property Name="IDImovina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Opis" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Vrednost" Type="float" Nullable="false" />
+    <Property Name="IDPolisa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Klijent">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prezime" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BrojTelefona" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DatumRodjenja" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Korisnik">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Objekat">
+    <Key>
+      <PropertyRef Name="IDObjekat" />
+    </Key>
+    <Property Name="IDObjekat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Opis" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Povrsina" Type="float" Nullable="false" />
+    <Property Name="Vrednost" Type="float" Nullable="false" />
+    <Property Name="IDPolisa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Polisa">
+    <Key>
+      <PropertyRef Name="IDPolisa" />
+    </Key>
+    <Property Name="IDPolisa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JMBG" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="DatOd" Type="date" Nullable="false" />
+    <Property Name="DatDo" Type="date" Nullable="false" />
+    <Property Name="Tarifa" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Premija" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Imovina_Polisa">
+    <End Role="Polisa" Type="Self.Polisa" Multiplicity="1" />
+    <End Role="Imovina" Type="Self.Imovina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Polisa">
+        <PropertyRef Name="IDPolisa" />
+      </Principal>
+      <Dependent Role="Imovina">
+        <PropertyRef Name="IDPolisa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Objekat_Polisa">
+    <End Role="Polisa" Type="Self.Polisa" Multiplicity="1" />
+    <End Role="Objekat" Type="Self.Objekat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Polisa">
+        <PropertyRef Name="IDPolisa" />
+      </Principal>
+      <Dependent Role="Objekat">
+        <PropertyRef Name="IDPolisa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Polisa_Klijent">
+    <End Role="Klijent" Type="Self.Klijent" Multiplicity="1" />
+    <End Role="Polisa" Type="Self.Polisa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klijent">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Polisa">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OsiguranjeModelStoreContainer">
+    <EntitySet Name="Imovina" EntityType="Self.Imovina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Klijent" EntityType="Self.Klijent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Objekat" EntityType="Self.Objekat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Polisa" EntityType="Self.Polisa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Imovina_Polisa" Association="Self.FK_Imovina_Polisa">
+      <End Role="Polisa" EntitySet="Polisa" />
+      <End Role="Imovina" EntitySet="Imovina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Objekat_Polisa" Association="Self.FK_Objekat_Polisa">
+      <End Role="Polisa" EntitySet="Polisa" />
+      <End Role="Objekat" EntitySet="Objekat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Polisa_Klijent" Association="Self.FK_Polisa_Klijent">
+      <End Role="Klijent" EntitySet="Klijent" />
+      <End Role="Polisa" EntitySet="Polisa" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

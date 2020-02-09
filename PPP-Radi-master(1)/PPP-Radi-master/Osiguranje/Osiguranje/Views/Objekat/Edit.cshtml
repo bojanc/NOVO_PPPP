@@ -1,0 +1,57 @@
+﻿@model Osiguranje.Models.Objekat
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Objekat</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IDObjekat)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Opis, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Opis, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Opis, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Povrsina, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Povrsina, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Povrsina, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vrednost, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vrednost, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Vrednost, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.IDPolisa)
+
+        <div class="form-group">
+            <div class="col-md-2" style="text-align:right;">
+                <a href="@Url.Action("Details", "Polisa", new { id = Model.IDPolisa })" class="btn btn-primary btn sm">
+                    Nazad
+                </a>
+            </div>
+            <div class="col-md-10">
+                <input type="submit" value="Potvrdi" class="btn btn-primary btn sm" />
+            </div>
+        </div>
+    </div>
+}
+
+

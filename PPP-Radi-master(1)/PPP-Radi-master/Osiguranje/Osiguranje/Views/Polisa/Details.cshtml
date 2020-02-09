@@ -1,0 +1,161 @@
+﻿@model Osiguranje.Models.Polisa
+
+@{
+    ViewBag.Title = "Details";
+}
+<br />
+<h2>Polisa</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DatOd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatOd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatDo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatDo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tarifa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarifa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Premija)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premija)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Klijent.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klijent.Ime) @Html.DisplayFor(model => model.Klijent.Prezime)
+        </dd>
+
+    </dl>
+</div>
+<hr />
+<p>
+    <a href="@Url.Action("Details", "Klijent", new { id = Model.JMBG})" class="btn btn-primary btn sm">
+        Nazad
+    </a>
+    <a href="@Url.Action("Edit", "Polisa", new { id = Model.IDPolisa})" class="btn btn-primary btn sm">
+        Izmeni
+    </a>
+    @if (Model.Objekats.Count == 0)
+    {
+        <a href="@Url.Action("Create", "Objekat", new { id = Model.IDPolisa })" class="btn btn-primary btn sm">
+            Nov objekat
+        </a>
+    }
+    @if (Model.Imovinas.Count == 0)
+    {
+        <a href="@Url.Action("Create", "Imovina", new { id = Model.IDPolisa })" class="btn btn-primary btn sm">
+            Nova imovina
+        </a>
+    }
+</p>
+@if(Model.Objekats.Count>0 || Model.Imovinas.Count >0)
+{
+    <br />
+    <br />
+    <br />
+}
+
+@if (Model.Objekats.Count > 0)
+{
+    <table width="100%">
+        <tr>
+            <td style="padding-bottom:5px;">
+                <h3>Objekti</h3>
+            </td>
+            <td align="right">
+                <a href="@Url.Action("Create", "Objekat", new { id = Model.IDPolisa })" class="btn btn-primary btn sm">
+                    Nov objekat
+                </a>
+            </td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+            <th>Opis</th>
+            <th>Povrsina</th>
+            <th>Vrednost</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Objekats)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Opis)</td>
+                <td>@Html.DisplayFor(modelItem => item.Povrsina)</td>
+                <td>@Html.DisplayFor(modelItem => item.Vrednost)</td>
+                <td align="right">
+                    <a href="@Url.Action("Edit", "Objekat", new { id = item.IDObjekat })" class="btn btn-primary btn sm">
+                        Izmeni
+                    </a>
+                    <a href="@Url.Action("Delete", "Objekat", new { id = item.IDObjekat })" class="btn btn-danger btn sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+
+
+}
+@if (Model.Imovinas.Count > 0)
+{
+    <table width="100%">
+        <tr>
+            <td style="padding-bottom:5px;">
+                <h3>Imovine</h3>
+            </td>
+            <td align="right">
+                <a href="@Url.Action("Create", "Imovina", new { id = Model.IDPolisa })" class="btn btn-primary btn sm">
+                    Nova imovina
+                </a>
+            </td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+            <th>Opis</th>
+            <th>Vrednost</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Imovinas)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Opis)</td>
+                <td>@Html.DisplayFor(modelItem => item.Vrednost)</td>
+                <td align="right">
+                    <a href="@Url.Action("Edit", "Imovina", new { id = item.IDImovina })" class="btn btn-primary btn sm">
+                        Izmeni
+                    </a>
+                    <a href="@Url.Action("Delete", "Imovina", new { id = item.IDImovina })" class="btn btn-danger btn sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+
+
+}

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OsiguranjeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="OsiguranjeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Imovinas" EntityType="OsiguranjeModel.Imovina" />
+    <EntitySet Name="Klijents" EntityType="OsiguranjeModel.Klijent" />
+    <EntitySet Name="Korisniks" EntityType="OsiguranjeModel.Korisnik" />
+    <EntitySet Name="Objekats" EntityType="OsiguranjeModel.Objekat" />
+    <EntitySet Name="Polisas" EntityType="OsiguranjeModel.Polisa" />
+    <EntitySet Name="sysdiagrams" EntityType="OsiguranjeModel.sysdiagram" />
+    <AssociationSet Name="FK_Imovina_Polisa" Association="OsiguranjeModel.FK_Imovina_Polisa">
+      <End Role="Polisa" EntitySet="Polisas" />
+      <End Role="Imovina" EntitySet="Imovinas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Polisa_Klijent" Association="OsiguranjeModel.FK_Polisa_Klijent">
+      <End Role="Klijent" EntitySet="Klijents" />
+      <End Role="Polisa" EntitySet="Polisas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Objekat_Polisa" Association="OsiguranjeModel.FK_Objekat_Polisa">
+      <End Role="Polisa" EntitySet="Polisas" />
+      <End Role="Objekat" EntitySet="Objekats" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Imovina">
+    <Key>
+      <PropertyRef Name="IDImovina" />
+    </Key>
+    <Property Name="IDImovina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Opis" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Vrednost" Type="Double" Nullable="false" />
+    <Property Name="IDPolisa" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Polisa" Relationship="OsiguranjeModel.FK_Imovina_Polisa" FromRole="Imovina" ToRole="Polisa" />
+  </EntityType>
+  <EntityType Name="Klijent">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Ime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Prezime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BrojTelefona" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DatumRodjenja" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Polisas" Relationship="OsiguranjeModel.FK_Polisa_Klijent" FromRole="Klijent" ToRole="Polisa" />
+  </EntityType>
+  <EntityType Name="Korisnik">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Objekat">
+    <Key>
+      <PropertyRef Name="IDObjekat" />
+    </Key>
+    <Property Name="IDObjekat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Opis" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Povrsina" Type="Double" Nullable="false" />
+    <Property Name="Vrednost" Type="Double" Nullable="false" />
+    <Property Name="IDPolisa" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Polisa" Relationship="OsiguranjeModel.FK_Objekat_Polisa" FromRole="Objekat" ToRole="Polisa" />
+  </EntityType>
+  <EntityType Name="Polisa">
+    <Key>
+      <PropertyRef Name="IDPolisa" />
+    </Key>
+    <Property Name="IDPolisa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JMBG" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="DatOd" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DatDo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Tarifa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Premija" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Imovinas" Relationship="OsiguranjeModel.FK_Imovina_Polisa" FromRole="Polisa" ToRole="Imovina" />
+    <NavigationProperty Name="Klijent" Relationship="OsiguranjeModel.FK_Polisa_Klijent" FromRole="Polisa" ToRole="Klijent" />
+    <NavigationProperty Name="Objekats" Relationship="OsiguranjeModel.FK_Objekat_Polisa" FromRole="Polisa" ToRole="Objekat" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Imovina_Polisa">
+    <End Type="OsiguranjeModel.Polisa" Role="Polisa" Multiplicity="1" />
+    <End Type="OsiguranjeModel.Imovina" Role="Imovina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Polisa">
+        <PropertyRef Name="IDPolisa" />
+      </Principal>
+      <Dependent Role="Imovina">
+        <PropertyRef Name="IDPolisa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Polisa_Klijent">
+    <End Type="OsiguranjeModel.Klijent" Role="Klijent" Multiplicity="1" />
+    <End Type="OsiguranjeModel.Polisa" Role="Polisa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klijent">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Polisa">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Objekat_Polisa">
+    <End Type="OsiguranjeModel.Polisa" Role="Polisa" Multiplicity="1" />
+    <End Type="OsiguranjeModel.Objekat" Role="Objekat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Polisa">
+        <PropertyRef Name="IDPolisa" />
+      </Principal>
+      <Dependent Role="Objekat">
+        <PropertyRef Name="IDPolisa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,117 @@
+﻿@model Osiguranje.Models.Klijent
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<br />
+<h2>Klijent</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JMBG)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JMBG)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prezime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prezime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrojTelefona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrojTelefona)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumRodjenja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumRodjenja)
+        </dd>
+
+    </dl>
+</div>
+<hr />
+<p>
+    <a href="@Url.Action("Index", "Klijent")" class="btn btn-primary btn sm">
+        Nazad
+    </a>
+    <a href="@Url.Action("Edit", "Klijent", new { id = Model.JMBG })" class="btn btn-primary btn sm">
+        Izmeni
+    </a>
+    @if (Model.Polisas.Count == 0)
+    {
+        <a href="@Url.Action("Create", "Polisa", new { id = Model.JMBG })" class="btn btn-primary btn sm">
+            Nova polisa
+        </a>
+    }
+</p>
+@if(Model.Polisas.Count >0)
+{
+    <br /><br /><br />
+    <table width="100%">
+        <tr>
+            <td style="padding-bottom:5px;">
+                <h3>Polise</h3>
+            </td>
+            <td align="right">
+                <a href="@Url.Action("Create", "Polisa",new { id = Model.JMBG})" class="btn btn-primary btn sm">
+                    Nova polisa
+                </a>
+            </td>
+        </tr>
+    </table>
+<table class="table">
+    <tr>
+        <th>Pocetak osiguranja</th>
+        <th>Kraj osiguranja</th>
+        <th>Tarifa</th>
+        <th>Premija</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Polisas)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.DatOd)</td>        
+            <td>@Html.DisplayFor(modelItem => item.DatDo)</td>
+            <td>@Html.DisplayFor(modelItem => item.Tarifa)</td>
+            <td>@Html.DisplayFor(modelItem => item.Premija)</td>
+            <td align="right">
+                <a href="@Url.Action("Details", "Polisa",new { id = item.IDPolisa })" class="btn btn-primary btn sm">
+                    Detalji
+                </a>
+                <a href="@Url.Action("Delete", "Polisa",new { id = item.IDPolisa })" class="btn btn-danger btn sm">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+}
